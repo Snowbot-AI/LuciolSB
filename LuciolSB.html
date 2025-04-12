@@ -1,0 +1,725 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <title>Luciole.SB - Votre landing page intelligente</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <!-- Import de la police Inter -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link 
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" 
+    rel="stylesheet" 
+  />
+  <!-- Calendly widget CSS -->
+  <link href="https://assets.calendly.com/assets/external/widget.css" rel="stylesheet">
+  <style>
+    :root {
+      --primary-gradient: linear-gradient(90deg, #ffb905, #ffa500);
+      --primary-color: #ffb905;
+      --accent-color: #1e2022;
+      --bg-color: #f5f7fa;
+      --card-bg: rgba(255, 255, 255, 0.75);
+      --text-color: #333;
+      --font-family: 'Inter', sans-serif;
+      --shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+    }
+    html {
+      scroll-behavior: smooth;
+    }
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+    body {
+      font-family: var(--font-family);
+      color: var(--text-color);
+      background: var(--bg-color);
+      line-height: 1.6;
+    }
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
+    h1, h2, h3, h4, h5, h6 {
+      font-weight: 700;
+      margin-bottom: 0.5em;
+      color: var(--accent-color);
+    }
+    p {
+      margin-bottom: 1em;
+    }
+    section {
+      padding: 80px 20px;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+    /* HEADER */
+    header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 1rem 2rem;
+      background: rgba(255,255,255,0.95);
+      backdrop-filter: blur(10px);
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+      z-index: 1000;
+      transition: background 0.3s ease;
+    }
+    .logo {
+      font-weight: 700;
+      font-size: 1.5rem;
+      color: var(--primary-color);
+    }
+    nav ul {
+      list-style: none;
+      display: flex;
+      gap: 1.5rem;
+    }
+    nav a {
+      font-weight: 600;
+      transition: color 0.3s ease;
+    }
+    nav a:hover {
+      color: var(--primary-color);
+    }
+    /* HERO */
+    .hero {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      gap: 1rem;
+      padding-top: 150px; /* Pour compenser le header fixe */
+      padding-bottom: 100px;
+      background: var(--primary-gradient);
+      color: #fff;
+      animation: fadeIn 1s ease-out;
+    }
+    .hero h1 {
+      font-size: 2.8rem;
+      margin-bottom: 0.3em;
+    }
+    .hero p {
+      max-width: 800px;
+      font-size: 1.1rem;
+      line-height: 1.8;
+    }
+    .cta-hero {
+      background: #fff;
+      color: var(--primary-color);
+      padding: 16px 32px;
+      border-radius: 50px;
+      font-weight: 700;
+      text-transform: uppercase;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    .cta-hero:hover {
+      transform: scale(1.05);
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+    }
+    /* Blocs – Effet Glassmorphism */
+    .feature-box,
+    .pricing-card,
+    .agent-item,
+    .testimonial {
+      background: var(--card-bg);
+      backdrop-filter: blur(10px);
+      border-radius: 15px;
+      padding: 2rem;
+      box-shadow: var(--shadow);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    .feature-box:hover,
+    .pricing-card:hover,
+    .agent-item:hover,
+    .testimonial:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 12px 25px rgba(0,0,0,0.15);
+    }
+    /* FONCTIONNALITÉS */
+    .features {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 2rem;
+      margin-top: 2rem;
+    }
+    .features .section-subtitle {
+      font-weight: 600;
+      margin-bottom: 1rem;
+      color: var(--primary-color);
+    }
+    .feature-box h3 {
+      margin-bottom: 1rem;
+      font-size: 1.3rem;
+      color: var(--primary-color);
+    }
+    /* Liste d'installation */
+    .installation-list {
+      margin-top: 1rem;
+      padding-left: 1.5rem;
+    }
+    .installation-list li {
+      margin-bottom: 0.5rem;
+      line-height: 1.5;
+    }
+    /* COUNTDOWN – version visuelle et impactante */
+    .countdown-section {
+      padding: 100px 20px;
+      background: var(--primary-gradient);
+      color: #fff;
+      text-align: center;
+    }
+    .countdown-content h2 {
+      font-size: 2.8rem;
+      margin-bottom: 20px;
+    }
+    .countdown-content p {
+      font-size: 1.2rem;
+      margin-bottom: 40px;
+    }
+    .countdown-timer {
+      display: flex;
+      justify-content: center;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+    .time-box {
+      background: rgba(255, 255, 255, 0.15);
+      padding: 20px;
+      border-radius: 15px;
+      width: 120px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    .time-box span:first-child {
+      font-size: 2.5rem;
+      font-weight: 700;
+    }
+    .label {
+      font-size: 1rem;
+      margin-top: 10px;
+    }
+    /* TARIFS */
+    .pricing-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 2rem;
+      margin-top: 2rem;
+    }
+    .pricing-card h3 {
+      margin-bottom: 1rem;
+      font-size: 1.6rem;
+      color: var(--primary-color);
+    }
+    .price {
+      font-size: 2rem;
+      margin: 1rem 0;
+      font-weight: 700;
+      color: var(--primary-color);
+    }
+    .pricing-card ul {
+      list-style: none;
+      text-align: left;
+      margin-bottom: 1.5rem;
+    }
+    .pricing-card li {
+      margin-bottom: 0.5rem;
+      font-weight: 400;
+    }
+    .pricing-card button {
+      background: var(--primary-gradient);
+      color: #fff;
+      border: none;
+      padding: 12px 24px;
+      border-radius: 50px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    .pricing-card button:hover {
+      transform: scale(1.05);
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+    }
+    /* Détails complémentaires dans Tarifs */
+    .pricing-details {
+      margin-top: 20px;
+      font-size: 0.95rem;
+      line-height: 1.5;
+      color: var(--accent-color);
+    }
+    .pricing-details ul {
+      list-style: disc inside;
+      margin-top: 10px;
+    }
+    /* AGENTSIA */
+    .agent-list {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 2rem;
+      margin-top: 2rem;
+    }
+    .agent-item h4 {
+      margin-bottom: 1rem;
+      font-weight: 700;
+      color: var(--primary-color);
+    }
+    /* PROMO ALL INCLUSIVE */
+    .promo {
+      padding: 100px 20px;
+      background: var(--primary-gradient);
+      color: #fff;
+      text-align: center;
+    }
+    .promo h2 {
+      font-size: 2.8rem;
+      margin-bottom: 1rem;
+    }
+    .promo p {
+      font-size: 1.2rem;
+      margin-bottom: 2rem;
+    }
+    .promo button {
+      background: #fff;
+      color: var(--primary-color);
+      padding: 16px 32px;
+      border: none;
+      border-radius: 50px;
+      font-weight: 700;
+      cursor: pointer;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    .promo button:hover {
+      transform: scale(1.05);
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+    }
+    /* PROCESSUS */
+    .processus {
+      padding: 80px 20px;
+      text-align: center;
+    }
+    .processus h2 {
+      font-size: 2rem;
+      margin-bottom: 20px;
+      color: var(--accent-color);
+    }
+    .processus ol {
+      list-style: decimal inside;
+      display: inline-block;
+      text-align: left;
+      font-size: 1rem;
+      line-height: 1.8;
+    }
+    .processus li {
+      margin-bottom: 10px;
+    }
+    /* TÉMOIGNAGES */
+    .testimonial-list {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 2rem;
+      margin-top: 2rem;
+    }
+    .testimonial p {
+      font-style: italic;
+      margin-bottom: 1em;
+    }
+    .testimonial span {
+      font-weight: 600;
+    }
+    /* BONUS – Avantages concrets */
+    .bonus {
+      padding: 80px 20px;
+      background: #fff;
+      text-align: center;
+    }
+    .bonus h2 {
+      font-size: 2.2rem;
+      margin-bottom: 20px;
+      color: var(--accent-color);
+    }
+    .bonus p {
+      font-size: 1.1rem;
+      margin-bottom: 40px;
+    }
+    .bonus-list {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 2rem;
+    }
+    .bonus-item {
+      background: var(--card-bg);
+      backdrop-filter: blur(10px);
+      border-radius: 15px;
+      padding: 1.5rem;
+      box-shadow: var(--shadow);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    .bonus-item:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 12px 25px rgba(0,0,0,0.15);
+    }
+    .bonus-item h4 {
+      margin-bottom: 0.5rem;
+      color: var(--primary-color);
+    }
+    /* DEMO – Réservez votre démo */
+    .demo {
+      padding: 80px 20px;
+      background: #fff;
+      text-align: center;
+    }
+    .demo h2 {
+      font-size: 2rem;
+      margin-bottom: 20px;
+      color: var(--accent-color);
+    }
+    .demo p {
+      font-size: 1.1rem;
+      margin-bottom: 40px;
+    }
+    .demo-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 2rem;
+      margin-bottom: 40px;
+    }
+    .demo-card {
+      background: var(--card-bg);
+      backdrop-filter: blur(10px);
+      border-radius: 15px;
+      padding: 1.5rem;
+      box-shadow: var(--shadow);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    .demo-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 12px 25px rgba(0,0,0,0.15);
+    }
+    .demo-card h4 {
+      margin-bottom: 0.5rem;
+      color: var(--primary-color);
+    }
+    .cta-demo {
+      background: var(--primary-gradient);
+      color: #fff;
+      padding: 16px 32px;
+      border: none;
+      border-radius: 50px;
+      font-weight: 700;
+      text-transform: uppercase;
+      cursor: pointer;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    .cta-demo:hover {
+      transform: scale(1.05);
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+    }
+    /* FOOTER */
+    footer {
+      background: rgba(255,255,255,0.95);
+      text-align: center;
+      padding: 20px 10px;
+      margin-top: 2rem;
+      box-shadow: 0 -2px 10px rgba(0,0,0,0.05);
+    }
+    footer p {
+      font-size: 0.9rem;
+      color: var(--accent-color);
+    }
+    /* Animation */
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    /* Responsivité */
+    @media (max-width: 768px) {
+      header {
+        flex-direction: column;
+        gap: 1rem;
+      }
+      nav ul {
+        flex-wrap: wrap;
+        justify-content: center;
+      }
+      .countdown-timer,
+      .demo-grid,
+      .bonus-list {
+        flex-wrap: wrap;
+        gap: 1rem;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- HEADER -->
+  <header>
+    <div class="logo">Luciole.SB</div>
+    <nav>
+      <ul>
+        <li><a href="#hero">Accueil</a></li>
+        <li><a href="#features">Fonctionnalités</a></li>
+        <li><a href="#pricing">Tarifs</a></li>
+        <li><a href="#agents">AgentsIA</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <!-- HERO -->
+  <section class="hero" id="hero">
+    <h1>Votre landing page intelligente</h1>
+    <p>
+      Il est temps d’allumer votre vitrine. Faites de votre site un véritable aimant d’attractivité grâce à une refonte totale, un dashboard intelligent connecté et 3 agents IA intégrés, spécialement conçus pour les parcs de loisirs.
+      <br><br>
+      Luciole, c’est bien plus qu’une landing page : c’est la transformation digitale complète de votre site vers le digital de 2025.
+    </p>
+    <a href="#pricing" class="cta-hero">Découvrir nos offres</a>
+  </section>
+
+  <!-- FONCTIONNALITÉS -->
+  <section id="features">
+    <h2>Fonctionnalités Révolutionnaires</h2>
+    <p>
+      Votre site devient clair, rapide et vendeur. Suivez vos performances avec une webapp analytique et activez vos agents IA à votre convenance – zéro technique, aucun casse-tête, le tout livré en 21 jours.
+    </p>
+    <p class="section-subtitle">Ce qu’on installe chez vous (en 3 semaines chrono) :</p>
+    <ol class="installation-list">
+      <li>Refonte complète de TOUTES vos pages actuelles, version “landing page intelligente”</li>
+      <li>Webapp Snowbot intégrée à votre site pour mesurer vues, clics, paniers, FAQ et temps passé</li>
+      <li>3 Agents IA prêts à l’emploi, activables en un clic (et offerts pour l’été)</li>
+    </ol>
+  </section>
+
+  <!-- COUNTDOWN -->
+  <section class="countdown-section">
+    <div class="countdown-content">
+      <h2>OFFRE DE LANCEMENT – 741 € de valeur offerte</h2>
+      <p>Vos 3 Agents IA sont 100 % GRATUITS pendant JUILLET – AOÛT – Septembre<br>Réservez avant le 19 mai</p>
+      <div class="countdown-timer" id="countdown">
+        <div class="time-box">
+          <span id="days">00</span>
+          <span class="label">Jours</span>
+        </div>
+        <div class="time-box">
+          <span id="hours">00</span>
+          <span class="label">Heures</span>
+        </div>
+        <div class="time-box">
+          <span id="minutes">00</span>
+          <span class="label">Minutes</span>
+        </div>
+        <div class="time-box">
+          <span id="seconds">00</span>
+          <span class="label">Secondes</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- TARIFS -->
+  <section id="pricing">
+    <h2>Nos Offres Sur-Mesure</h2>
+    <p>
+      Choisissez le pack adapté à la taille de votre site et à vos ambitions :
+      <br>
+      Livraison en 21 jours (site complet + dashboard) • QR codes IA fournis • Garantie 100 % satisfait ou remboursé.
+    </p>
+    <div class="pricing-grid">
+      <!-- Pack STARTER -->
+      <div class="pricing-card">
+        <h3>STARTER</h3>
+        <p class="price">1 280€</p>
+        <ul>
+          <li>Transformation complète de votre site</li>
+          <li>1 à 5 pages principales</li>
+          <li>Abonnement : 12€/mois après l’été</li>
+          <li>Agents IA offerts</li>
+        </ul>
+        <button onclick="document.location='#agents'">Choisir Starter</button>
+      </div>
+      <!-- Pack GROWTH -->
+      <div class="pricing-card">
+        <h3>GROWTH</h3>
+        <p class="price">3 897€</p>
+        <ul>
+          <li>Transformation complète de votre site</li>
+          <li>5 à 15 pages / plusieurs activités</li>
+          <li>Abonnement : 37€/mois après l’été</li>
+          <li>Agents IA offerts</li>
+        </ul>
+        <button onclick="document.location='#agents'">Choisir Growth</button>
+      </div>
+      <!-- Pack SCALE -->
+      <div class="pricing-card">
+        <h3>SCALE</h3>
+        <p class="price">9 700€</p>
+        <ul>
+          <li>Transformation complète pour sites complexes</li>
+          <li>+15 pages / multi-sites / plusieurs langues</li>
+          <li>Abonnement : 97€/mois après l’été</li>
+          <li>Agents IA offerts</li>
+        </ul>
+        <button onclick="document.location='#agents'">Choisir Scale</button>
+      </div>
+    </div>
+    <div class="pricing-details">
+      <p><strong>Pour qui ?</strong></p>
+      <ul>
+        <li><strong>STARTER :</strong> Sites simples (ex. : petit parc aventure, escape game local, aire de jeux)</li>
+        <li><strong>GROWTH :</strong> Sites intermédiaires (ex. : parc multi-activités, base de loisirs, parc animalier)</li>
+        <li><strong>SCALE :</strong> Sites complexes (ex. : parc régional, site touristique départemental, événement majeur)</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- AGENTSIA -->
+  <section id="agents">
+    <h2>AgentsIA intégrés à la solution</h2>
+    <p>Découvrez nos 3 Agents IA performants pour automatiser et optimiser vos interactions :</p>
+    <div class="agent-list">
+      <div class="agent-item">
+        <h4>Luciol</h4>
+        <p>Répond aux visiteurs et analyse FAQ & avis<br><strong>87€ / mois</strong> (après août)</p>
+      </div>
+      <div class="agent-item">
+        <h4>Neo</h4>
+        <p>Détecte l’émotion et repère les prospects chauds<br><strong>87€ / mois</strong> (après août)</p>
+      </div>
+      <div class="agent-item">
+        <h4>Dexter</h4>
+        <p>Relance automatique via CRM, mail, SMS<br><strong>87€ / mois</strong> (après août)</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- PROMO ALL INCLUSIVE -->
+  <section class="promo" id="all-inclusive">
+    <h2>Pack complet All-Inclusive : 147 €/mois</h2>
+    <p>
+      Support IA prioritaire • Mises à jour en continu • Spécialisation Tourisme & Loisirs
+    </p>
+    <p>
+      Offre limitée à 30 parcs — Réservation avant le 19 mai<br>
+      Co-création accompagnée et garantie remboursé si non livré.
+    </p>
+    <button onclick="document.location='#pricing'">En savoir plus</button>
+  </section>
+
+  <!-- PROCESSUS -->
+  <section class="processus" id="processus">
+    <h2>Votre transformation en 3 clics</h2>
+    <ol>
+      <li>Choisissez votre pack (Starter / Growth / Scale)</li>
+      <li>Payez l’installation (Stripe sécurisé)</li>
+      <li>Nous reformatez votre site et l’équipe Luciole s’occupe du reste</li>
+      <li>Vous vendez plus dès le 1er juillet</li>
+    </ol>
+  </section>
+
+  <!-- TÉMOIGNAGES -->
+  <section id="testimonials">
+    <h2>Ce que disent les parcs que nous équipons</h2>
+    <p>
+      Plus de réservations, moins de temps passé à répondre manuellement et une image modernisée – voilà les résultats concrets obtenus.
+    </p>
+    <div class="testimonial-list">
+      <div class="testimonial">
+        <p>« En 3 semaines, on est passé d’un site statique à une machine qui parle à nos visiteurs en temps réel. »</p>
+        <span>– Parc Aventure X</span>
+      </div>
+      <div class="testimonial">
+        <p>« On n’a jamais eu autant de demandes confirmées sur juillet-août. »</p>
+        <span>– Base de Loisirs Y</span>
+      </div>
+      <div class="testimonial">
+        <p>« C’est comme si on avait embauché un vendeur digital qui bosse 24h/24. »</p>
+        <span>– Site Touristique Z</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- BONUS – Avantages concrets -->
+  <section id="bonus" class="bonus">
+    <h2>Les Bonus qui Transforment Votre Parc</h2>
+    <p>Vos 3 Agents IA offerts pendant 3 mois vous apportent des bénéfices concrets :</p>
+    <div class="bonus-list">
+      <div class="bonus-item">
+        <h4>Augmentation des réservations</h4>
+        <p>Attirez plus de visiteurs et convertissez-les grâce à une réponse instantanée et personnalisée.</p>
+      </div>
+      <div class="bonus-item">
+        <h4>Réduction du temps de gestion</h4>
+        <p>Automatisez les interactions pour gagner du temps et vous concentrer sur l’essentiel.</p>
+      </div>
+      <div class="bonus-item">
+        <h4>Image moderne et rassurante</h4>
+        <p>Offrez à votre parc une vitrine digitale innovante qui inspire confiance et professionnalisme.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- DEMO – Réservez une démo -->
+  <section id="demo" class="demo">
+    <h2>Réservez une démo</h2>
+    <p>Découvrez en direct comment notre solution transforme votre landing page en un véritable levier de performance. Lors de cette démo, vous verrez :</p>
+    <div class="demo-grid">
+      <div class="demo-card">
+        <h4>Analyse de votre landing page</h4>
+        <p>Évaluation complète de votre site actuel et recommandations personnalisées.</p>
+      </div>
+      <div class="demo-card">
+        <h4>Présentation du dashboard connecté</h4>
+        <p>Visualisez vos données en temps réel avec une interface intuitive et responsive.</p>
+      </div>
+      <div class="demo-card">
+        <h4>Démonstration des agents IA</h4>
+        <p>Voyez comment nos agents optimisent l’expérience utilisateur et boostent vos ventes.</p>
+      </div>
+    </div>
+    <button class="cta-demo" onclick="Calendly.initPopupWidget({url: 'https://calendly.com/snowbot/lancement-cube-brain'});return false;">Réservez une démo</button>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <p>© 2025 Luciole.SB - Tous droits réservés.</p>
+  </footer>
+
+  <!-- SCRIPT COUNTDOWN -->
+  <script>
+    // Date cible : 19 mai 2025 23:59:59
+    const countDownDate = new Date("May 19, 2025 23:59:59").getTime();
+    const daysEl = document.getElementById("days");
+    const hoursEl = document.getElementById("hours");
+    const minutesEl = document.getElementById("minutes");
+    const secondsEl = document.getElementById("seconds");
+
+    function updateCountdown() {
+      const now = new Date().getTime();
+      const distance = countDownDate - now;
+      if (distance < 0) {
+        daysEl.innerHTML = "00";
+        hoursEl.innerHTML = "00";
+        minutesEl.innerHTML = "00";
+        secondsEl.innerHTML = "00";
+      } else {
+        const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+        const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+        const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+        daysEl.innerHTML = days < 10 ? "0" + days : days;
+        hoursEl.innerHTML = hours < 10 ? "0" + hours : hours;
+        minutesEl.innerHTML = minutes < 10 ? "0" + minutes : minutes;
+        secondsEl.innerHTML = seconds < 10 ? "0" + seconds : seconds;
+      }
+    }
+    setInterval(updateCountdown, 1000);
+  </script>
+</body>
+</html>
